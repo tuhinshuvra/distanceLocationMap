@@ -1,10 +1,18 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
 
 const MapComponent = () => {
+
+    const userLocation1 = JSON.parse(localStorage.getItem('location'));
+    console.log("UserLocation1 :", userLocation1);
+
+    const userOneLat1 = userLocation1?.coordinates?.lat;
+    const userOneLan1 = userLocation1?.coordinates?.lng;
+    console.log("User Lati and Langi", userOneLat1, userOneLan1)
+
     useEffect(() => {
         const map = L.map('map').setView([28.2380, 83.9956], 11);
         const mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
@@ -14,10 +22,15 @@ const MapComponent = () => {
             maxZoom: 18
         }).addTo(map);
 
+        // const firstPoint = [55.745, 11.945];
+        const firstPoint = [userOneLat1, userOneLan1];
+        // const firstPoint = [57.76, 11.42];
+        const secondPoint = [23.7682801369032, 90.42319619550057]
+
         L.Routing.control({
             waypoints: [
-                L.latLng(57.74, 11.94),
-                L.latLng(57.6792, 11.949)
+                L.latLng(firstPoint),
+                L.latLng(secondPoint)
             ]
         }).addTo(map);
 

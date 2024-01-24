@@ -1,22 +1,19 @@
 import { useState, useEffect } from 'react';
 
-const useGeoLocation = () => {
-    const storedLocation = JSON.parse(localStorage.getItem('location'));
+const useGeoLocationBkup = () => {
     const [location, setLocation] = useState({
         loaded: false,
         coordinates: { lat: "", lng: "" },
     });
 
     const onSuccess = (location) => {
-        const newLocation = {
+        setLocation({
             loaded: true,
             coordinates: {
                 lat: location.coords.latitude,
-                lng: location.coords.longitude,
+                lan: location.coords.longitude,
             },
-        };
-        setLocation(newLocation);
-        localStorage.setItem('location', JSON.stringify(newLocation));
+        });
     };
 
     const onError = (error) => {
@@ -26,6 +23,7 @@ const useGeoLocation = () => {
         });
     };
 
+
     useEffect(() => {
         if (!("geolocation" in navigator)) {
             onError({
@@ -34,15 +32,11 @@ const useGeoLocation = () => {
             });
         }
 
-        if (storedLocation) {
-            setLocation(storedLocation);
-        } else {
-            navigator.geolocation.getCurrentPosition(onSuccess, onError);
-        }
+        navigator.geolocation.getCurrentPosition(onSuccess, onError)
 
-    }, [storedLocation]);
+    }, [])
 
     return location;
 };
 
-export default useGeoLocation;
+export default useGeoLocationBkup;
