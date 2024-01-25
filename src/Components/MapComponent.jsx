@@ -6,12 +6,20 @@ import 'leaflet-routing-machine';
 
 const MapComponent = () => {
 
-    const userLocation1 = JSON.parse(localStorage.getItem('location'));
-    console.log("UserLocation1 :", userLocation1);
+    const userOneLocation = JSON.parse(localStorage.getItem('locationOne'));
+    console.log("UserOneLocation :", userOneLocation);
 
-    const userOneLat1 = userLocation1?.coordinates?.lat;
-    const userOneLan1 = userLocation1?.coordinates?.lng;
-    console.log("User Lati and Langi", userOneLat1, userOneLan1)
+    const userTwoLocation = JSON.parse(localStorage.getItem('locationTwo'));
+    console.log("UserTwoLocation :", userTwoLocation);
+
+    const userOneLat = userOneLocation?.coordinates?.lat;
+    const userOneLan = userOneLocation?.coordinates?.lng;
+
+    const userTwoLat = userTwoLocation?.coordinates?.lat;
+    const userTwoLan = userTwoLocation?.coordinates?.lng;
+
+    console.log("User One Lati and Langi", userOneLat, userOneLan)
+    console.log("User Two Lati and Langi", userTwoLat, userTwoLan)
 
     useEffect(() => {
         const map = L.map('map').setView([28.2380, 83.9956], 11);
@@ -23,8 +31,9 @@ const MapComponent = () => {
         }).addTo(map);
 
         // const firstPoint = [55.745, 11.945];
-        const firstPoint = [userOneLat1, userOneLan1];
-        // const firstPoint = [57.76, 11.42];
+        // const secondPoint = [userTwoLat, userTwoLan]
+
+        const firstPoint = [userOneLat, userOneLan];
         const secondPoint = [23.7682801369032, 90.42319619550057]
 
         L.Routing.control({

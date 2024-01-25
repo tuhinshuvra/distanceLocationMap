@@ -1,7 +1,7 @@
 import useGeoLocation from './useGeoLocation';
 
 const UserCurrentGEOLocation = () => {
-    // const storedLocation = JSON.parse(localStorage.getItem('location'));
+    // const storedLocation = JSON.parse(localStorage.getItem('locationOne'));
     // console.log("storedLocation :", storedLocation);
 
     const location = useGeoLocation();

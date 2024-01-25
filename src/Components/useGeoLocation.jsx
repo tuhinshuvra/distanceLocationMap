@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 const useGeoLocation = () => {
-    const storedLocation = JSON.parse(localStorage.getItem('location'));
+    const storedLocation = JSON.parse(localStorage.getItem('locationOne'));
     const [location, setLocation] = useState({
         loaded: false,
         coordinates: { lat: "", lng: "" },
@@ -16,7 +16,7 @@ const useGeoLocation = () => {
             },
         };
         setLocation(newLocation);
-        localStorage.setItem('location', JSON.stringify(newLocation));
+        localStorage.setItem('locationOne', JSON.stringify(newLocation));
     };
 
     const onError = (error) => {
